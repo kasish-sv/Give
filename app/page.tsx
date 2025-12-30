@@ -3,7 +3,7 @@ import Image from "next/image";
 export default function Home() {
   return (
     <main>
-      <h1>Welcome to My Next.js App</h1>
+      <h1>Give</h1>
       <Image
         src="/images/sample.jpg"
         alt="Sample Image"
