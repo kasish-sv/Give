@@ -8,18 +8,12 @@ datasource db {
   url = env("DATABASE_URL")
 }
 
-model User {
-  id    String  @id @default(auto()) @map("_id") @db.ObjectId
-  email String  @unique
-  name  String?
-  posts Post[]
-}
+model Donation {
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  address     String?
+  available   Boolean @default(true)
 
-model Post {
-  id        String  @id @default(auto()) @map("_id") @db.ObjectId
-  title     String
-  content   String?
-  published Boolean @default(false)
-  author    User    @relation(fields: [authorId], references: [id])
-  authorId  String  @db.ObjectId
+  donorId     String
+  recipientId String? 
 }
