@@ -1,4 +1,4 @@
-import { createDonation } from "@/lib/prisma-db";
+import { createDonation, markDonationAsClaimed } from "@/lib/prisma-db";
 import { redirect } from "next/navigation";
 import { auth, currentUser } from "@clerk/nextjs/server";
 
@@ -11,4 +11,10 @@ export async function createDonationAction(formData: FormData) {
     const data = { title, address, donorId };
     await createDonation(data);
     redirect("/donations");
+}
+
+export async function markDonationAsClaimedAction(donationId: string, recipientId: string) {
+    "use server";
+    await markDonationAsClaimed(donationId, recipientId);
+    redirect("/live");
 }
