@@ -13,6 +13,10 @@ model Donation {
   title       String
   address     String?
   available   Boolean @default(true)
+  special_inst String?
+  createdAt   DateTime @default(now())
+  claimedAt   DateTime?
+  location    Json
 
   donorId     String
   recipientId String? 

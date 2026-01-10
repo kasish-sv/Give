@@ -7,8 +7,16 @@ export async function createDonationAction(formData: FormData) {
     const user = await currentUser();
     const title = formData.get("donate-title") as string;
     const address = formData.get("donate-address") as string;
+    const special_inst = formData.get("donate-special-instructions") as string;
+    console.log("Form Data:", { title, address, special_inst });
+    
+    const longitude = formData.get("donate-longitude") as string;
+    const latitude = formData.get("donate-latitude") as string;
+
+    const location = { type: "Point", coordinates: [parseFloat(longitude), parseFloat(latitude)] };
     var donorId = user?.primaryEmailAddress?.emailAddress || "";
-    const data = { title, address, donorId };
+    
+    const data = { title, address, special_inst, donorId, location };
     await createDonation(data);
     redirect("/donations");
 }
