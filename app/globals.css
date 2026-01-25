@@ -123,3 +123,18 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer components{
+  .navbar-link{
+    @apply text-gray-400 hover:text-black dark:hover:text-white transition-all duration-400
+  }
+
+
+  .footer-link{
+    @apply text-gray-400 text-2xl hover:text-gray-600 dark:hover:text-gray-200 transition-all duration-400
+  }
+
+  .section-header{
+    @apply text-4xl text-gray-400 font-extrabold tracking-tight text-balance justify-center text-center p-8
+  }
+}

@@ -1,1 +1,4 @@
-Add a spinner to the address input. Looks a bit weird to update slow
+Add Home page
+Add About Page
+
+Beautify the Live page and create a proper donations page

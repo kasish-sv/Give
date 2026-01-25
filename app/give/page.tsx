@@ -10,12 +10,13 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { createDonationAction } from "@/lib/actions";
-import { DonorLocation } from "@/components/DonorLocation";
-import { reverseGeocode } from "@/lib/location";
+import { DonorLocation } from "@/components/form/DonorLocation";
+import { ImageUpload } from "@/components/card/DonationImage";
+import { FormSubmit } from "@/components/form/FormSubmit";
 
 export default function Give() {
   return (
-    <div className="w-full max-w-md">
+    <div className="w-full max-w-md mx-auto py-10">
       <form action={createDonationAction} className="space-y-8">
         <FieldGroup>
           <FieldSet>
@@ -30,6 +31,7 @@ export default function Give() {
                 </FieldLabel>
                 <Input id="donate-title" name="donate-title" required />
               </Field>
+
               <DonorLocation />
 
               <Field>
@@ -43,10 +45,11 @@ export default function Give() {
                   className="resize-none"
                 />
               </Field>
+              <ImageUpload />
             </FieldGroup>
           </FieldSet>
           <Field orientation="horizontal">
-            <Button type="submit">Submit</Button>
+            <FormSubmit value="Submit" />
             <Button variant="outline" type="button">
               Cancel
             </Button>

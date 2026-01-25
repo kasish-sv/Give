@@ -11,6 +11,12 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useEffect, useState } from "react";
 import { reverseGeocode } from "@/lib/location";
+import { Spinner } from "../ui/spinner";
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupInput,
+} from "../ui/input-group";
 
 export function DonorLocation() {
   const [location, setLocation] = useState<string | null>(null);
@@ -33,12 +39,26 @@ export function DonorLocation() {
   return (
     <Field>
       <FieldLabel htmlFor="donate-address">Address</FieldLabel>
-      <Textarea
-        id="donate-address"
-        name="donate-address"
-        placeholder="1234 Main St, City, State, ZIP"
-        defaultValue={location || ""}
-      />
+      {location ? (
+        <Textarea
+          id="donate-address"
+          name="donate-address"
+          placeholder="1234 Main St, City, State, ZIP"
+          defaultValue={location || ""}
+        />
+      ) : (
+        <InputGroup>
+          <Textarea
+            id="donate-address"
+            name="donate-address"
+            placeholder="1234 Main St, City, State, ZIP"
+            disabled
+          />
+          <InputGroupAddon align="inline-end">
+            <Spinner className="size-6" />
+          </InputGroupAddon>
+        </InputGroup>
+      )}
       <FieldDescription>
         Enter your complete address for smoother pickup
       </FieldDescription>

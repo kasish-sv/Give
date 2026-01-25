@@ -1,4 +1,4 @@
-import { DonationsCard } from "@/components/DonationsCard";
+import { DonationsCard } from "@/components/card/DonationsCard";
 import {
   getAvailableDonations,
   getDonationsNearLocation,
