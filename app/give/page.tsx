@@ -16,11 +16,13 @@ import { FormSubmit } from "@/components/form/FormSubmit";
 
 export default function Give() {
   return (
-    <div className="w-full max-w-md mx-auto py-10">
+    <div className="w-full max-w-md mx-auto py-10 frosted-glass p-6 m-6 rounded-lg shadow-lg ">
       <form action={createDonationAction} className="space-y-8">
         <FieldGroup>
           <FieldSet>
-            <FieldLegend>Donation</FieldLegend>
+            <FieldLegend>
+              Donate today and be part of a better tomorrow
+            </FieldLegend>
             <FieldDescription>
               All Donations are transparent and go directly to the cause
             </FieldDescription>
@@ -48,11 +50,8 @@ export default function Give() {
               <ImageUpload />
             </FieldGroup>
           </FieldSet>
-          <Field orientation="horizontal">
-            <FormSubmit value="Submit" />
-            <Button variant="outline" type="button">
-              Cancel
-            </Button>
+          <Field orientation="vertical">
+            <FormSubmit value="Donate" />
           </Field>
         </FieldGroup>
       </form>

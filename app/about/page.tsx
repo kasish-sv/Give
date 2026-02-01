@@ -2,8 +2,11 @@ import Image from "next/image";
 
 export default function About() {
   return (
-    <main className="flex min-h-screen flex-col items-center p-12">
+    <main className="flex min-h-screen flex-col items-center p-12 text-xs lg:text-base">
       <Image src="/images/logo.jpeg" alt="Give Logo" width={50} height={50} />
+      <div className=" mt-4 text-3xl font-bold w-full p-6 text-center frosted-glass">
+        About Give
+      </div>
       <p className="mt-4 text-justify">
         Give is more than just a platform, it is a movement built on compassion,
         empathy, and the belief that small acts of kindness can create lasting
@@ -31,7 +34,7 @@ export default function About() {
         clarity and simplicity, allowing them to focus on what truly matters —
         making a difference.
       </p>
-      <p className="mt-4 text-justify">
+      <p className="mt-4 text-justify hidden lg:block">
         The platform is built to be inclusive, ensuring that anyone, regardless
         of background or experience, can join the journey of giving. But Give is
         not just about transactions; it is about building community. Each act of

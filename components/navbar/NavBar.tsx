@@ -8,14 +8,8 @@ import {
   NavigationMenuTrigger,
   NavigationMenuViewport,
 } from "@/components/ui/navigation-menu";
-import {
-  ClerkProvider,
-  SignInButton,
-  SignUpButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
-} from "@clerk/nextjs";
+import { SignInButton, SignUpButton, SignedIn, SignedOut } from "@clerk/nextjs";
+import CustomUserButton from "./CustomUserButton";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "../ui/button";
 import Link from "next/link";
@@ -24,7 +18,7 @@ import { ModeToggle } from "./ThemeToggle";
 import { MobileNavbar } from "./MobileNavbar";
 export default function NavBar() {
   return (
-    <div className="flex items-center p-5 md:px-8 font-medium border-b border-gray-300 dark:border-gray-700">
+    <div className="flex items-center p-5 md:px-8 font-medium border-b border-gray-300 frosted-glass">
       <div className="block sm:hidden">
         <MobileNavbar />
       </div>
@@ -57,7 +51,11 @@ export default function NavBar() {
 
       <div className="flex space-x-2.5 ml-auto items-center">
         <SignedOut>
-          <SignInButton />
+          <SignInButton>
+            <Button variant="ghost" className="navbar-link cursor-pointer">
+              Sign In
+            </Button>
+          </SignInButton>
           <SignUpButton>
             <button className="bg-[#6c47ff] text-ceramic-white h-8 rounded-full px-4 sm:h-12 cursor-pointer">
               Sign Up
@@ -65,7 +63,7 @@ export default function NavBar() {
           </SignUpButton>
         </SignedOut>
         <SignedIn>
-          <UserButton />
+          <CustomUserButton />
         </SignedIn>
         <ModeToggle />
       </div>

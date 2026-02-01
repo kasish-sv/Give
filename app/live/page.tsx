@@ -4,19 +4,12 @@ import {
   getDonationsNearLocation,
 } from "@/lib/prisma-db";
 import { auth, currentUser } from "@clerk/nextjs/server";
+
 import { LocationClient } from "@/lib/geolocation";
 
 import { cookies } from "next/headers";
 
 export default async function Live() {
-  // Use `auth()` to access `isAuthenticated` - if false, the user is not signed in
-  const { isAuthenticated } = await auth();
-
-  // Protect the route by checking if the user is signed in
-  if (!isAuthenticated) {
-    return <div>Sign in to view this page</div>;
-  }
-
   // Get the Backend User object when you need access to the user's information
   const user = await currentUser();
   const cookieStore = await cookies();
@@ -37,9 +30,21 @@ export default async function Live() {
   return (
     <div>
       <LocationClient />
-      <div>Welcome, {user?.primaryEmailAddress?.emailAddress}!</div>
-      <h1 className="text-2xl font-bold mb-4">All Available Donations</h1>
+      <div className="p-4">
+        <h1 className="text-2xl font-bold mb-4">
+          Browse through the list of available donations in your vicinity
+        </h1>
+        <span className="text-md">
+          Act quickly to make a difference! Donations are only listed if they
+          are made in the last 24 hours to ensure freshness.
+        </span>
+      </div>
       <DonationsCard donations={donations} />
+      <p className="leading-4 text-xs text-center p-4">
+        Please note that the donations listed here are based on your current
+        location. If you wish to see donations in a different area, please
+        update your location settings.
+      </p>
     </div>
   );
 }
