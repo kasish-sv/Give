@@ -3,3 +3,12 @@ Add Home page
         ~ create a proper donations page - Show claimed person and claimed date
         
     - For new users - Show alternate data
+
+- seperate Loading page on the donations page
+- confirmation messages when the submit action is complete.
+
+Areas of improvement:
+
+    - Have a proper S3 storage to store images and retrieve them on cards.
+    - Cards can be dynamic pages
+    - Lazy load and infinite scroll on the Live page

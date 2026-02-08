@@ -12,6 +12,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/navbar/ThemeProvider";
 import { ModeToggle } from "@/components/navbar/ThemeToggle";
 import NavBar from "@/components/navbar/NavBar";
+import { Toaster } from "@/components/ui/sonner";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -50,7 +51,9 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             <NavBar />
+
             {children}
+            <Toaster />
           </ThemeProvider>
         </body>
       </html>

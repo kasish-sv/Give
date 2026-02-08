@@ -8,6 +8,7 @@ import { auth, currentUser } from "@clerk/nextjs/server";
 import { LocationClient } from "@/lib/geolocation";
 
 import { cookies } from "next/headers";
+import { SkeletonCard } from "@/components/ui/SkeletonCard";
 
 export default async function Live() {
   // Get the Backend User object when you need access to the user's information

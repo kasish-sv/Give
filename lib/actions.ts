@@ -32,14 +32,14 @@ export async function markDonationAsClaimedAction(donationId: string, recipientI
     redirect("/live");
 }
 
-export async function sendDonorConfirmationEmail(firstName: string, email: string) {
+export async function sendDonorConfirmationEmail(donorId:string, title: string, address: string|null, createdAt: string, recipientName: string, recipientEmail: string) {
     const resend = new Resend(process.env.RESEND_API_KEY);
     
     const { data, error } = await resend.emails.send({
     from: 'onboarding@resend.dev', // Development only
-    to: [email],
-    subject: 'Welcome to Resend!',
-    react: DonorConfirmation({ firstName }),
+    to: [donorId],
+    subject: 'Give : Donation Claimed!',
+    react: DonorConfirmation({ title, address, createdAt, recipientName, recipientEmail }),
     });
 
   if (error) {
@@ -49,14 +49,14 @@ export async function sendDonorConfirmationEmail(firstName: string, email: strin
   return { success: true }
 }
 
-export async function sendRecipientConfirmationEmail(firstName: string, email: string) {
+export async function sendRecipientConfirmationEmail(donorId:string, title: string, address: string|null, createdAt: string, recipientEmail: string, special_inst: string|null) {
     const resend = new Resend(process.env.RESEND_API_KEY);
     
     const { data, error } = await resend.emails.send({
     from: 'onboarding@resend.dev', // Development only
-    to: [email],
-    subject: 'Welcome to Resend!',
-    react: RecipientConfirmation({ firstName }),
+    to: [recipientEmail],
+    subject: 'Give : Claim Successful!',
+    react: RecipientConfirmation({ donorId, title, address, createdAt, special_inst }),
     });
 
   if (error) {
@@ -66,11 +66,11 @@ export async function sendRecipientConfirmationEmail(firstName: string, email: s
   return { success: true }
 }
 
-export async function liveFormAction(donationId: string, recipientId: string, title: string, donorId: string, address: string|null, special_inst: string|null) {
+export async function liveFormAction(donationId: string, recipientId: string, recipientName: string, donorId: string, title: string, createdAt: string, address: string|null, special_inst: string|null) {
     Promise.all([
         markDonationAsClaimedAction(donationId, recipientId),
-        sendDonorConfirmationEmail("Kasish", donorId),
-        sendRecipientConfirmationEmail("Kasish", recipientId)
+        sendDonorConfirmationEmail(donorId, title, address, createdAt, recipientName, recipientId),
+        sendRecipientConfirmationEmail(donorId, title, address, createdAt, recipientId, special_inst)
     ]);
     redirect("/live");
 }

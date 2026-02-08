@@ -17,17 +17,19 @@ type donationListProps = {
   donations: Donation[];
 };
 
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "../ui/collapsible";
+function normalizeDate(raw: any): Date {
+  if (raw.$date) return new Date(raw.$date);
+  return new Date(raw);
+}
+
 import { Card, CardHeader, CardContent, CardFooter } from "../ui/card";
 import { FormSubmit } from "../form/FormSubmit";
 
 export async function DonationsCard({ donations }: donationListProps) {
   const user = await currentUser();
   var recipientId = user?.primaryEmailAddress?.emailAddress || "";
+  var recipientName = user?.firstName || "";
+
   return (
     <div className="grid gap-6 p-4 grid-cols-2 lg:grid-cols-5 justify-center justify-items-center">
       {donations.map((donation) => (
@@ -47,6 +49,9 @@ export async function DonationsCard({ donations }: donationListProps) {
             <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
               {donation.address}
             </p>
+            <p className="mb-2 text-xs font-bold text-gray-500 dark:text-gray-400">
+              Donated on: {normalizeDate(donation.createdAt)?.toLocaleString()}
+            </p>
           </CardHeader>
           <CardFooter>
             <form
@@ -54,8 +59,10 @@ export async function DonationsCard({ donations }: donationListProps) {
                 null,
                 donation.id,
                 recipientId,
-                donation.title,
+                recipientName,
                 donation.donorId,
+                donation.title,
+                normalizeDate(donation.createdAt).toLocaleString(),
                 donation.address,
                 donation.special_inst,
               )}
