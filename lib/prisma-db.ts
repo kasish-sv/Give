@@ -48,6 +48,7 @@ type DonationRaw = {
 //creating a findraw as Prisma does not support geospatial queries natively
 export async function getDonationsNearLocation(userLng: number, userLat: number) {
   let rawDonations;
+  
   rawDonations = await prisma.donation.findRaw({
     filter: {
       location: {
@@ -59,7 +60,9 @@ export async function getDonationsNearLocation(userLng: number, userLat: number)
           $maxDistance: 5000, // meters (5 km)
         },
       },
+      createdAt: { $gte: {$date : new Date(Date.now() - 24*3600*1000) } },
       available: true,
+      // Only show donations from the last 24 hours
     },
   }) as unknown as DonationRaw[];
 

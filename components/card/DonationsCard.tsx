@@ -2,7 +2,7 @@ import Image from "next/image";
 import { Donation } from "@/generated/prisma/client";
 import { markDonationAsClaimed } from "@/lib/prisma-db";
 import { auth, currentUser } from "@clerk/nextjs/server";
-import { markDonationAsClaimedAction } from "@/lib/actions";
+import { liveFormAction } from "@/lib/actions";
 import { Button } from "../ui/button";
 import {
   Popover,
@@ -37,11 +37,11 @@ export async function DonationsCard({ donations }: donationListProps) {
         >
           <CardHeader>
             <Image
-              src={"/images/goodfood.jpg"}
+              src={"/images/givefood.png"}
               alt={donation.title}
-              width={128}
-              height={128}
-              className="aspect-square w-full rounded-sm object-cover"
+              width={96}
+              height={96}
+              className="aspect-square w-full"
             />
             <p className="py-4 font-bold">{donation.title}</p>
             <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
@@ -50,10 +50,14 @@ export async function DonationsCard({ donations }: donationListProps) {
           </CardHeader>
           <CardFooter>
             <form
-              action={markDonationAsClaimedAction.bind(
+              action={liveFormAction.bind(
                 null,
                 donation.id,
                 recipientId,
+                donation.title,
+                donation.donorId,
+                donation.address,
+                donation.special_inst,
               )}
               className="flex flex-col w-full gap-2"
             >

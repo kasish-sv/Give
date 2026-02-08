@@ -3,7 +3,3 @@ Add Home page
         ~ create a proper donations page - Show claimed person and claimed date
         
     - For new users - Show alternate data
-
-
-Add email functionality when donation claimed
-Change logic to look for donations only 36 hours before the current date
