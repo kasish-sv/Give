@@ -17,6 +17,13 @@ export async function getDonationsByDonorId(donorId: string) {
   });
 }
 
+export async function getDonationsByRecipientId(recipientId: string) {
+  return await prisma.donation.findMany({
+    where: { recipientId : recipientId },
+    orderBy: { claimedAt: 'desc', },
+  });
+}
+
 export async function getAvailableDonations() {
   return await prisma.donation.findMany({
     where: { available: true },

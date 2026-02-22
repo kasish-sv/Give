@@ -1,5 +1,3 @@
-Add donations received page
-
 Areas of improvement:
 
     - Have a proper S3 storage to store images and retrieve them on cards.
