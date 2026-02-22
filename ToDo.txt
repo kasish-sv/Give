@@ -1,11 +1,4 @@
-Add Home page 
-    - For signed in users - Show Dashboard - Profile page
-        ~ create a proper donations page - Show claimed person and claimed date
-        
-    - For new users - Show alternate data
-
-- seperate Loading page on the donations page
-- confirmation messages when the submit action is complete.
+Add donations received page
 
 Areas of improvement:
 

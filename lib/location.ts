@@ -32,7 +32,6 @@ export async function reverseGeocode(lat: number, lng: number): Promise<string> 
 }
 
 export async function submitLocation(lat: number, lng: number) {
-  console.log("User location:", { lat, lng });
   const cookiesStore = await cookies();
   cookiesStore.set(
     "user_location",

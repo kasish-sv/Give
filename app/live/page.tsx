@@ -25,7 +25,6 @@ export default async function Live() {
   // Fetch donations near the user's location
   const radiusMeters = 5000; // 5 km const
 
-  console.log("Fetching donations near:", userLng, userLat);
   const donations = await getDonationsNearLocation(userLng, userLat);
 
   return (

@@ -24,6 +24,8 @@ function normalizeDate(raw: any): Date {
 
 import { Card, CardHeader, CardContent, CardFooter } from "../ui/card";
 import { FormSubmit } from "../form/FormSubmit";
+import { SubmitConfirm } from "../ui/SubmitConfirm";
+import { ConfirmationPage } from "@/app/_internalPage/ConfirmationPage";
 
 export async function DonationsCard({ donations }: donationListProps) {
   const user = await currentUser();

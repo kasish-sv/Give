@@ -13,6 +13,7 @@ export async function createDonation(data: { title: string; address: string ;spe
 export async function getDonationsByDonorId(donorId: string) {
   return await prisma.donation.findMany({
     where: { donorId : donorId },
+    orderBy: { createdAt: 'desc', },
   });
 }
 

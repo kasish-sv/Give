@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+"use client";
 import {
   Field,
   FieldDescription,
@@ -13,13 +13,25 @@ import { createDonationAction } from "@/lib/actions";
 import { DonorLocation } from "@/components/form/DonorLocation";
 import { ImageUpload } from "@/components/card/DonationImage";
 import { FormSubmit } from "@/components/form/FormSubmit";
-import { SubmitConfirm } from "@/components/ui/SubmitConfirm";
-import { toast } from "sonner";
+import { useState } from "react";
+import { ConfirmationModal } from "@/components/ui/ConfirmationModal";
 
 export default function Give() {
+  const [open, setOpen] = useState(false);
+  const [message, setMessage] = useState("");
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const result = await createDonationAction(formData);
+    if (result.success) {
+      setMessage("Your donation has been created successfully!");
+      setOpen(true);
+    }
+  }
+
   return (
     <div className="w-full max-w-md mx-auto py-10 frosted-glass p-6 m-6 rounded-lg shadow-lg ">
-      <form action={createDonationAction} className="space-y-8">
+      <form onSubmit={handleSubmit} className="space-y-8">
         <FieldGroup>
           <FieldSet>
             <FieldLegend>
@@ -57,6 +69,7 @@ export default function Give() {
           </Field>
         </FieldGroup>
       </form>
+      <ConfirmationModal open={open} onOpenChange={setOpen} message={message} />
     </div>
   );
 }

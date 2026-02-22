@@ -24,7 +24,7 @@ export async function createDonationAction(formData: FormData) {
     
     const data = { title, address, special_inst, donorId, location };
     await createDonation(data);
-    redirect("/donations");
+    return { success: true };
 }
 
 export async function markDonationAsClaimedAction(donationId: string, recipientId: string) {
@@ -72,5 +72,5 @@ export async function liveFormAction(donationId: string, recipientId: string, re
         sendDonorConfirmationEmail(donorId, title, address, createdAt, recipientName, recipientId),
         sendRecipientConfirmationEmail(donorId, title, address, createdAt, recipientId, special_inst)
     ]);
-    redirect("/live");
+    redirect("/confirmation");
 }
