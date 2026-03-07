@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Donation } from "@/generated/prisma/client";
+import { Donation } from "@prisma/client";
 import { markDonationAsClaimed } from "@/lib/prisma-db";
 import { auth, currentUser } from "@clerk/nextjs/server";
 import { liveFormAction } from "@/lib/actions";
