@@ -1,6 +1,7 @@
 "use client";
+
+import { motion } from "motion/react";
 import Image from "next/image";
-import { motion } from "framer-motion";
 
 export default function About() {
   console.log(
