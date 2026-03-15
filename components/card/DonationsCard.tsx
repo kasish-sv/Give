@@ -26,6 +26,7 @@ import { Card, CardHeader, CardContent, CardFooter } from "../ui/card";
 import { FormSubmit } from "../form/FormSubmit";
 import { SubmitConfirm } from "../ui/SubmitConfirm";
 import { ConfirmationPage } from "@/app/_internalPage/ConfirmationPage";
+import { Badge } from "@/components/ui/badge";
 
 export async function DonationsCard({ donations }: donationListProps) {
   const user = await currentUser();
@@ -40,6 +41,12 @@ export async function DonationsCard({ donations }: donationListProps) {
           className="flex justify-between w-full max-w-xs flex-col frosted-glass"
         >
           <CardHeader>
+            <Badge
+              variant="secondary"
+              className="absolute top-2 right-2 p-2 m-2 text-xs"
+            >
+              {donation.type}
+            </Badge>
             <Image
               src={"/images/givefood.png"}
               alt={donation.title}
@@ -53,6 +60,10 @@ export async function DonationsCard({ donations }: donationListProps) {
             </p>
             <p className="mb-2 text-xs font-bold text-gray-500 dark:text-gray-400">
               Donated on: {normalizeDate(donation.createdAt)?.toLocaleString()}
+            </p>
+            <p className="mb-2 text-xs font-bold text-gray-500 dark:text-gray-400">
+              Best Before:{" "}
+              {normalizeDate(donation.bestBefore)?.toLocaleString()}
             </p>
           </CardHeader>
           <CardFooter>

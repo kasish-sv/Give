@@ -1,10 +1,8 @@
+import strict from 'node:assert/strict';
 import { prisma } from './prisma'
 import { ObjectId } from 'mongodb';
-export async function getAlldonations() {
-  return await prisma.donation.findMany();
-}
 
-export async function createDonation(data: { title: string; address: string ;special_inst?: string; donorId:string; location: { type: string; coordinates: number[] };}) {
+export async function createDonation(data: { title: string; address: string ;special_inst?: string; donorId:string; type: string; bestBefore: Date; location: { type: string; coordinates: number[] };}) {
   return await prisma.donation.create({
     data,
   });
@@ -46,6 +44,8 @@ type DonationRaw = {
   address: string | null;
   available: boolean;
   special_inst: string | null;
+  type: string;
+  bestBefore: Date;
   createdAt: Date;
   claimedAt: Date | null;
   location: { type: "Point"; coordinates: [number, number] };
@@ -68,7 +68,7 @@ export async function getDonationsNearLocation(userLng: number, userLat: number)
           $maxDistance: 5000, // meters (5 km)
         },
       },
-      createdAt: { $gte: {$date : new Date(Date.now() - 24*3600*1000) } },
+      bestBefore: { $gte: {$date : new Date(Date.now()) } },
       available: true,
       // Only show donations from the last 24 hours
     },
@@ -83,6 +83,8 @@ export async function getDonationsNearLocation(userLng: number, userLat: number)
     special_inst: raw.special_inst,
     createdAt: raw.createdAt,
     claimedAt: raw.claimedAt,
+    type: raw.type,
+    bestBefore: raw.bestBefore,
     location: {
       type: "Point",
       coordinates: raw.location.coordinates,

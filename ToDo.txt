@@ -1,4 +1,6 @@
 Areas of improvement:
+    -In live page include type and radius
+    -Date IST convert all
 
     - Have a proper S3 storage to store images and retrieve them on cards.
     - Cards can be dynamic pages

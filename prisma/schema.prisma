@@ -11,10 +11,12 @@ model Donation {
   id          String  @id @default(auto()) @map("_id") @db.ObjectId
   title       String
   address     String?
+  type        String
   available   Boolean @default(true)
   special_inst String?
   createdAt   DateTime @default(now())
   claimedAt   DateTime?
+  bestBefore  DateTime
   location    Json
 
   donorId     String

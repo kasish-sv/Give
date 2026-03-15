@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { auth, currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import frontPage from "@/components/comp/frontPage";

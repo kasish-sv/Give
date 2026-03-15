@@ -5,9 +5,6 @@ import { auth, currentUser } from "@clerk/nextjs/server";
 import { DonorConfirmation } from "@/components/mail_template/DonorConfirmation";
 import { RecipientConfirmation } from "@/components/mail_template/RecipientConfirmation";
 import {Resend} from "resend";
-import error from "next/error";
-import { create } from "domain";
-import { env } from "process";
 
 export async function createDonationAction(formData: FormData) {
     
@@ -21,8 +18,9 @@ export async function createDonationAction(formData: FormData) {
 
     const location = { type: "Point", coordinates: [parseFloat(longitude), parseFloat(latitude)] };
     var donorId = user?.primaryEmailAddress?.emailAddress || "";
-    
-    const data = { title, address, special_inst, donorId, location };
+    const type = formData.get("donate-type") as string;
+    const bestBefore = formData.get("donate-best-before") as string;
+    const data = { title, address, special_inst, donorId, type, bestBefore: new Date(bestBefore), location };
     await createDonation(data);
     return { success: true };
 }

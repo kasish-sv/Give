@@ -10,6 +10,7 @@ type Donation = {
   address: string | null;
   available: boolean;
   special_inst: string | null;
+  type: string;
   createdAt: Date;
   claimedAt: Date | null;
   donorId: string;
@@ -37,6 +38,10 @@ export const columns: ColumnDef<Donation>[] = [
   {
     accessorKey: "donorId",
     header: "Donor Email",
+  },
+  {
+    accessorKey: "type",
+    header: "Donation Type",
   },
   {
     accessorKey: "claimedAt",

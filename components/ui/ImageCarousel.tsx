@@ -20,22 +20,22 @@ export default function CarouselPlugin() {
   return (
     <Carousel
       plugins={[plugin.current]}
-      className="w-full max-w-xs rounded-lg md:max-w-xl p-4"
+      className="mx-auto w-full max-w-xs rounded-lg md:max-w-xl"
       onMouseEnter={plugin.current.stop}
       onMouseLeave={plugin.current.reset}
     >
       <CarouselContent>
         {Array.from({ length: 5 }).map((_, index) => (
           <CarouselItem key={index}>
-            <div className="p-1">
-              <Card>
-                <CardContent className="flex aspect-video items-center justify-center p-6">
+            <div>
+              <Card className="border-0 p-0 m-0">
+                <CardContent className="flex items-center justify-center p-0 m-0">
                   <Image
                     src={`/images/donate-img${index + 1}.webp`}
                     alt={`Image ${index + 1}`}
                     width={1200}
                     height={1000}
-                    className="rounded-md object-cover"
+                    className="rounded-md object-cover p-0 m-0"
                   />
                 </CardContent>
               </Card>
